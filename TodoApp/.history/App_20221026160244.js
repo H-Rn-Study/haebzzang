@@ -7,7 +7,6 @@ import DateHead from './components/DateHead';
 import AddTodo from "./components/AddTodo";
 import Empty from './components/Empty';
 import TodoList from './components/TodoList';
-import todoStorage from './storages/todoStorage';
 
 function App() {
   const today = new Date();
@@ -18,16 +17,19 @@ function App() {
     {id : 3, text : '투두리스트 만들어보기', done : false},
   ]);
 
+  // 불러오기
   useEffect(() => {
-    todoStorage
-    .get()
-    .then(setTodos)
-    .catch(console.error);
+    async function load() {
+      try {
+        const rawTodos = await AsyncStorage.getItem('todos');
+        const savedTodos = JSON.parse(rawTodos);
+        setTodos(savedTodos);
+      } catch (e) {
+        console.log('Failed to save todos');
+      }
+    }
+    load();
   }, []);
-
-  useEffect(() => {
-    todoStorage.set(todos).catch(console.error);
-  })
 
   const onInsert = text => {
     // 새로 등록할 항목의 id 구하기

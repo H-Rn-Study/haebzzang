@@ -5,7 +5,7 @@ function AddTodo({onInsert}) {
     const [text, setText] = useState('');
 
     const onPress = () => {
-        onInsert(text);
+        onInsert(text)
         setText('');
         Keyboard.dismiss();
     };

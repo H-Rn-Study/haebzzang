@@ -1,13 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, KeyboardAvoidingView, Platform} from 'react-native';
-import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage'
-
 import DateHead from './components/DateHead';
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 import AddTodo from "./components/AddTodo";
 import Empty from './components/Empty';
 import TodoList from './components/TodoList';
-import todoStorage from './storages/todoStorage';
 
 function App() {
   const today = new Date();
@@ -19,15 +16,8 @@ function App() {
   ]);
 
   useEffect(() => {
-    todoStorage
-    .get()
-    .then(setTodos)
-    .catch(console.error);
-  }, []);
-
-  useEffect(() => {
-    todoStorage.set(todos).catch(console.error);
-  })
+    console.log(todos);
+  }, [todos]);
 
   const onInsert = text => {
     // 새로 등록할 항목의 id 구하기

@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 import {View, StyleSheet, TextInput, Image, TouchableOpacity, Platform, TouchableNativeFeedback, Keyboard,} from "react-native";
 
-function AddTodo({onInsert}) {
+function AddTodo() {
     const [text, setText] = useState('');
 
     const onPress = () => {
-        onInsert(text);
         setText('');
         Keyboard.dismiss();
     };
